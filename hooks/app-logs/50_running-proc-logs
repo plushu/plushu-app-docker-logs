@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ -n "$PLUSHU_TRACE" ]] && set -x
+
+app="$1"
+app_dir="$PLUSHU_APPS_DIR/$app"
+
+# For instances where a glob has no matches we want an empty list
+shopt -s nullglob
+
+for proc_cidfile in "$app_dir"/proc/*; do
+  docker logs -t "$(<"$proc_cidfile")"
+done
