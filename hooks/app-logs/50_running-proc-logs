@@ -8,5 +8,5 @@ app_dir="$PLUSHU_APPS_DIR/$app"
 shopt -s nullglob
 
 for proc_cidfile in "$app_dir"/proc/*; do
-  docker logs -t "$(<"$proc_cidfile")"
+  docker logs -t "$(<"$proc_cidfile")" 2>&1
 done
